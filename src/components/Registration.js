@@ -35,7 +35,7 @@ const Registration = () => {
                            onChange={(e) => setPassword(e.target.value)}/>
                 </div>
                 <button className="btn btn-outline-primary btn-lg"  type="submit"
-                        disabled={!validateForm()}>Sign In
+                        disabled={!validateForm()}>Sign Up
                 </button>
             </form>
         </div>
