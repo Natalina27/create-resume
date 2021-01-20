@@ -7,13 +7,18 @@ const Cv = () => {
         <div>
             <form>
                 <div className="form-group">
-                    <input type="text"  id="firstName" placeholder="First Name"
+                    <input type="text"
+                           id="firstName"
+                           className="form-control"
+                           placeholder="First Name"
                            value={firstName}
                            onChange={(e) => setFirstName(e.target.value)}
                     />
                 </div>
                 <div className="form-group">
-                    <input type="text"  id="lastName"
+                    <input type="text"
+                           id="lastName"
+                           className="form-control"
                            placeholder="Last Name"
                            value={lastName}
                            onChange={(e) => setLastName(e.target.value)}/>
