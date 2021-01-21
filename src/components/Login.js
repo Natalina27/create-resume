@@ -15,22 +15,24 @@ const Login = () => {
 
     //if difference <= 1min  block ??? block button Else unblock
         if (timeDiff < 60000){
+            //add message
             console.log(' you are blocked for 1 min');
 
         }
     }
 
-    const handleSubmit = (e) => {
-        e.preventDefault();
+    const handleSubmit = (event) => {
+
+        event.preventDefault();
+
         const loginData = {
             email,
             password
         };
 
        const loginDataFromStorage =  JSON.parse(localStorage.getItem('login'));
-        console.log("loginData", loginData, loginDataFromStorage);
-        //compare 2 objects??
-        if(loginData.email === loginDataFromStorage.email && loginData.password === loginDataFromStorage.password){
+
+        if(JSON.stringify(loginData) === JSON.stringify(loginDataFromStorage) ){
             console.log('ok')
         }else{
             setCounter(counter + 1);
