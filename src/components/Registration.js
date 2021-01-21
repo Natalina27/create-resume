@@ -34,7 +34,7 @@ const Registration = (props) => {
     }
 
     function validateForm() {
-        return checkPwd(password) ==='OK';
+        return email.length && checkPwd(password) ==='OK';
     }
 
     return (
@@ -60,7 +60,7 @@ const Registration = (props) => {
     );
 };
 const mapStateToProps = (state) => ({
-
+// data from redux
 })
 const mapDispatchToProps = (dispatch) => ({
     userRegister:(newUser)=>dispatch({type:'ADD_USER', payload: newUser}),

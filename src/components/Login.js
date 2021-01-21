@@ -1,7 +1,8 @@
 import React from 'react';
 import {useState} from "react";
+import {connect} from "react-redux";
 
-const Login = () => {
+const Login = (props) => {
 
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -32,8 +33,12 @@ const Login = () => {
         if (loginDataFromStorage) {
 
             //compare 2 objects??
+
             if (loginData.email === loginDataFromStorage.email && loginData.password === loginDataFromStorage.password) {
                 console.log('ok')
+                // props.userLoggedIn();
+                localStorage.setItem('auth', JSON.stringify(true));
+
             } else {
                 setCounter(counter + 1);
                 console.log("counter", counter);
@@ -51,7 +56,7 @@ const Login = () => {
 
 
     function validateForm() {
-        return email.length > 0 && password.length >= 8 && !blockedUser;
+        return email.length && password.length && !blockedUser;
     }
 
     return (
@@ -77,4 +82,10 @@ const Login = () => {
     );
 };
 
-export default Login;
+const mapStateToProps = (state) => ({
+// data from redux
+})
+const mapDispatchToProps = (dispatch) => ({
+    userLoggedIn:(loggedState)=>dispatch({type:'SET_LOGIN_STATE', payload: loggedState}),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Login);

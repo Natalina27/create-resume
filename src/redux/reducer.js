@@ -28,6 +28,11 @@ const appReducer = (state = initialState, action) => {
                 ...state,
                 users: state.users.filter(el => el._id !== action.payload)
             }
+        case 'SET_LOGIN_STATE':
+            return {
+                ...state,
+                users: state.users.filter(el => el._id !== action.payload)
+            }
         default:
             return state;
     }

@@ -1,7 +1,13 @@
 import React, {useState} from 'react';
 import {connect} from "react-redux";
+import history from "../history";
 
 const Cv = (props) => {
+    if(!JSON.parse(localStorage.getItem('auth'))){
+        console.log('cv component');
+        history.push('/Login');
+
+    }
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     return (

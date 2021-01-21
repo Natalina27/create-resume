@@ -1,9 +1,10 @@
 //Core
 import React, {useEffect, useState} from "react";
-import {HashRouter as Router, Route, Link} from "react-router-dom";
+import {Router, Route, Link} from "react-router-dom";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import CV from "./components/CV";
+import history from './history';
 //Styles
 import styles from "./App.module.css";
 import classnames from "classnames";
@@ -29,6 +30,7 @@ const App = () => {
 
     let linkList = buttons.map((el, i) => {
         return <Link
+            key={el.path}
             to={el.path}
             className={classnames({
                 [styles.link]: true,
@@ -39,17 +41,19 @@ const App = () => {
     });
 
     return (
-        <Router>
+        <Router history={history}>
             <div className={styles.wrap}>
                 <div className={styles.inner}>
                     <div className={styles.nav}>
                         {linkList}
                     </div>
-                    <div className={styles.content}>
+                    {/*<div className={styles.content}>*/}
+                    {/*<Switch>*/}
                         <Route path='/' exact component={Registration}/>
                         <Route path='/Login' component={Login}/>
                         <Route path='/CV' component={CV}/>
-                    </div>
+                    {/*</Switch>*/}
+                    {/*</div>*/}
                 </div>
             </div>
         </Router>
