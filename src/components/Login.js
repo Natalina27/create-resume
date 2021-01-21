@@ -12,7 +12,7 @@ const Login = () => {
         const startBlockTime = JSON.parse(localStorage.getItem('startBlockTime'));
         let diff = new Date() - new Date(startBlockTime || new Date());
         console.log(diff);
-        if (diff > 1) {
+        if (diff > 60000) {
             localStorage.removeItem("startBlockTime");
             setBlockedUser(false);
         }
