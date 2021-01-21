@@ -1,6 +1,6 @@
 //Core
 import React, {useEffect, useState} from "react";
-import { HashRouter as Router, Route, Link } from "react-router-dom";
+import {HashRouter as Router, Route, Link} from "react-router-dom";
 import Registration from "./components/Registration";
 import Login from "./components/Login";
 import CV from "./components/CV";
@@ -10,7 +10,7 @@ import classnames from "classnames";
 
 const App = () => {
     const initialButtonsState = JSON.parse(sessionStorage.getItem("buttons")) || [
-        {name: 'Registration', isClicked: true, path: '/' },
+        {name: 'Registration', isClicked: true, path: '/'},
         {name: 'Login', isClicked: false, path: '/Login'},
         {name: 'CV', isClicked: false, path: '/CV'}
     ];
@@ -18,27 +18,27 @@ const App = () => {
 
     useEffect(() => {
         sessionStorage.setItem("buttons", JSON.stringify(buttons));
-    });
+    },[]);
 
     const chooseButtonClick = (idx) => {
-        const newButtons =[...buttons] ;
+        const newButtons = [...buttons];
         newButtons.map(el => el.isClicked = false);
         newButtons[idx].isClicked = true;
         setButtons(newButtons);
     };
 
     let linkList = buttons.map((el, i) => {
-        return  <Link
+        return <Link
             to={el.path}
-            className= {classnames({
+            className={classnames({
                 [styles.link]: true,
-                [styles.linkActive]: (el.isClicked) ,
+                [styles.linkActive]: (el.isClicked),
             })}
             onClick={() => chooseButtonClick(i)}
         >{el.name}</Link>
     });
 
-    return(
+    return (
         <Router>
             <div className={styles.wrap}>
                 <div className={styles.inner}>
@@ -46,9 +46,9 @@ const App = () => {
                         {linkList}
                     </div>
                     <div className={styles.content}>
-                        <Route path='/' exact component={Registration} />
-                        <Route path='/Login' component={Login} />
-                        <Route path='/CV' component={CV} />
+                        <Route path='/' exact component={Registration}/>
+                        <Route path='/Login' component={Login}/>
+                        <Route path='/CV' component={CV}/>
                     </div>
                 </div>
             </div>

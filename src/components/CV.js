@@ -1,28 +1,37 @@
 import React, {useState} from 'react';
+import {connect} from "react-redux";
 
-const Cv = () => {
+const Cv = (props) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     return (
         <div>
             <form>
                 <div className="form-group">
-                    <input type="text"  id="firstName" placeholder="First Name"
+                    <input type="text" id="firstName" placeholder="First Name"
                            value={firstName}
                            onChange={(e) => setFirstName(e.target.value)}
                     />
                 </div>
                 <div className="form-group">
-                    <input type="text"  id="lastName"
+                    <input type="text" id="lastName"
                            placeholder="Last Name"
                            value={lastName}
                            onChange={(e) => setLastName(e.target.value)}/>
                 </div>
-                <button className="btn btn-outline-primary btn-lg"  type="submit"> SUBMIT
+                <button className="btn btn-outline-primary btn-lg" type="submit"> SUBMIT
                 </button>
             </form>
         </div>
     );
 };
 
-export default Cv;
+const mapStateToProps = (state) => ({
+    infos: state.infos,
+})
+const mapDispatchToProps = (dispatch) => ({
+    addInfo: (info) => dispatch({type: 'ADD_INFO', payload: info}),
+    updateInfo: (info) => dispatch({type: 'UPDATE_INFO', payload: info}),
+    deleteInfo: (infoId) => dispatch({type: 'DELETE_INFO', payload: infoId}),
+})
+export default connect(mapStateToProps, mapDispatchToProps)(Cv);
