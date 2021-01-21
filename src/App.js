@@ -29,6 +29,7 @@ const App = () => {
 
     let linkList = buttons.map((el, i) => {
         return  <Link
+            key={el.path}
             to={el.path}
             className= {classnames({
                 [styles.link]: true,

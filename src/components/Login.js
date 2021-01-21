@@ -2,20 +2,23 @@ import React from 'react';
 import {useState} from "react";
 
 const Login = () => {
-
-
-    // if(localStorage.getItem('startBlockTime')){
-    //if difference <= 1min  block ??? block button Else unblock
-    //     const time = JSON.parse(localStorage.getItem('startBlockTime'));
-    //     const currentTime = new Date();
-    //     console.log('storageTime',time,  'currentTime', currentTime);
-    //     console.log('c-t', currentTime - time);
-    //     //console.log('getDate', currentTime.getDate() - time.getDate());
-    // }
-
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
-    const [counter, setCounter] = useState(0);
+    const [counter, setCounter] = useState(1);
+    const [blocked, setBlocked] = useState(false);
+
+    if(localStorage.getItem('startBlockTime')){
+
+        const timeFromStorage = JSON.parse(localStorage.getItem('startBlockTime'));
+        const currentTime =  Date.now();
+        const timeDiff = currentTime - timeFromStorage;
+
+    //if difference <= 1min  block ??? block button Else unblock
+        if (timeDiff < 60000){
+            console.log(' you are blocked for 1 min');
+
+        }
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -34,19 +37,20 @@ const Login = () => {
             console.log("counter", counter);
              if (counter >= 3){
                  // block user for 1 min
-                 localStorage.setItem('startBlockTime', JSON.stringify(new Date()));
+                 localStorage.setItem('startBlockTime', JSON.stringify(Date.now()));
+                 setBlocked(true);
              }
         }
 
 
     };
     function validateForm() {
-        return email.length > 0 && password.length >= 8;
+        return( email.length > 0 && password.length >= 8 && !blocked);
     }
 
     return (
         <div>
-            <form  onSubmit={handleSubmit}>
+            <form  className="loginForm" onSubmit={handleSubmit}>
                 <div className="form-group">
                     <input type="email" className="form-control" id="emailInput" placeholder="Email"
                            value={email}
@@ -59,7 +63,8 @@ const Login = () => {
                            value={password}
                            onChange={(e) => setPassword(e.target.value)}/>
                 </div>
-                <button className="btn btn-outline-primary btn-lg"  type="submit"
+                <button className="btn btn-outline-primary btn-lg"
+                        type="submit"
                         disabled={!validateForm()}>Log In
                 </button>
             </form>
